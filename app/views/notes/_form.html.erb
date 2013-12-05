@@ -1,31 +1,44 @@
-<%= form_for(@note) do |f| %>
-  <% if @note.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
-
-      <ul>
-      <% @note.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <p>
-  	This is a demonstration of adding the Google speech tags to a text area in Rails.
-  </p>
-  <ul>
-	  <li>speech</li>
-	  <li>x-webkit-speech</li>
-  </ul>
-  
-
-  <div class="field">
-    <%= f.label :message %><br>
+<div class="container">
 	
-    <%= f.text_field :message, size: 80, "x-webkit-speech" => "" %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+	<%= form_for(@note) do |f| %>
+	  <% if @note.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+	      <ul>
+	      <% @note.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+	  <p>
+	  	This is a demonstration of adding the Google speech tags to a text area in Rails.
+	  </p>
+	  <ul>
+		  <li>speech</li>
+		  <li>x-webkit-speech</li>
+	  </ul>
+  
+  		
+  		<div class="row">
+		  <div class="span3">
+		  	<%= f.label :message, "Speak your message in Chrome" %>
+		  </div>
+		  <div class="span6 field">
+		    <%= f.text_field :message, 
+								placeholder: 'Say something nice', 
+								class: 'input-large input-note',
+								"onwebkitspeechchange" => "this.form.submit()",
+								"x-webkit-speech" => "", 
+								"required" => "", 
+								"autofocus" => "" %>
+		  </div>
+		  <div class="span2 actions">
+		    <%= f.submit "Add Note", class: 'btn btn-lg btn-primary btn-block icon-save' %>
+		  </div>
+  		</div>
+	<% end %>
+
+</div>
